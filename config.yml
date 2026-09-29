@@ -1,0 +1,144 @@
+# ================================================================
+#                   DiscordWhitelist Configuration
+# ================================================================
+
+# Discord bot token from https://discord.com/developers/applications
+# Bot tab -> Reset Token / Copy. Keep this secret.
+bot-token: "PUT_YOUR_BOT_TOKEN_HERE"
+
+# Discord Guild (Server) ID.
+# Highly recommended: Setting this registers slash commands INSTANTLY to your server
+# without waiting up to 1 hour for Discord's global command cache.
+# Enable Developer Mode in Discord, right-click your server icon -> Copy Server ID.
+guild-id: "PUT_GUILD_ID_HERE"
+
+# The channel ID where the whitelist panel gets posted.
+# Right-click your desired whitelist channel -> Copy Channel ID.
+channel-id: "PUT_CHANNEL_ID_HERE"
+
+# Automatically (re)post the panel every time the server starts.
+# Recommended to keep false after your panel is posted once, so restarts don't create duplicate panels.
+auto-post-panel-on-startup: false
+
+# Your Minecraft Server IP (shown in Discord embeds after whitelisting)
+server-ip: "play.yourserver.com"
+
+# ----------------------------------------------------------------
+# Whitelist Engine Settings
+# ----------------------------------------------------------------
+settings:
+  # UUID mode:
+  # - "auto" (Recommended): Queries Mojang API for official Java UUID and proper casing.
+  #   If Mojang lookup fails or the server is offline/cracked, it falls back to offline UUID.
+  # - "mojang": Strictly requires an official Mojang account.
+  # - "offline": Always calculates offline UUIDs (ideal for offline-mode / cracked servers).
+  uuid-mode: "auto"
+
+  # Allow Bedrock / Geyser / Floodgate players (e.g. usernames starting with '.' or '*')
+  allow-bedrock-prefix: true
+
+  # Allow players to unwhitelist / unlink themselves using /unwhitelist or the panel Unlink button
+  allow-self-unwhitelist: true
+
+  # Kick player immediately from Minecraft if they get unwhitelisted while online
+  kick-on-unwhitelist: true
+  kick-message: "&cYou have been removed from the server whitelist."
+
+  # Automatically unwhitelist player if they leave the Discord server (requires GUILD_MEMBERS intent)
+  remove-whitelist-on-guild-leave: false
+
+# ----------------------------------------------------------------
+# Discord Role Management
+# ----------------------------------------------------------------
+roles:
+  # (Optional) Role ID granted to users when they successfully whitelist. Leave "" to disable.
+  whitelisted-role-id: ""
+
+  # (Optional) Role ID required before a user can whitelist (e.g., Verified Member, Subscriber). Leave "" to disable.
+  required-role-id: ""
+
+  # List of Discord Role IDs that have admin permissions for bot commands (in addition to Administrator permission)
+  admin-role-ids: []
+
+# ----------------------------------------------------------------
+# Command Access Permissions
+# ----------------------------------------------------------------
+permissions:
+  # Allow all Discord users to use /whois to see who owns a Minecraft account
+  allow-public-whois: true
+  # Allow all Discord users to use /registered to browse registered accounts
+  allow-public-list: true
+  # Allow all Discord users to use /online to see who is playing and their Discord tags
+  allow-public-online: true
+
+# ----------------------------------------------------------------
+# Discord Logging
+# ----------------------------------------------------------------
+logging:
+  # Send logs of whitelist/unwhitelist actions to a Discord channel
+  enabled: false
+  channel-id: ""
+
+# ----------------------------------------------------------------
+# Auto Updater Settings
+# ----------------------------------------------------------------
+updater:
+  # Enable automatic update checking
+  enabled: true
+
+  # Automatically download updates to the 'plugins/update' folder when available
+  # (Will be applied safely upon next server restart)
+  auto-download: false
+
+  # GitHub repository in format: "owner/repo"
+  github-repo: "Wuolp/DiscordWhitelist"
+
+  # Check interval in hours (0 = only check on server startup)
+  check-interval-hours: 12
+
+  # Notify admins in-game with permission 'discordwhitelist.admin' upon joining
+  notify-in-game: true
+
+  # Send notification to Discord log channel when an update is found
+  notify-discord: true
+
+# ----------------------------------------------------------------
+# Whitelist Panel Embed Customization
+# ----------------------------------------------------------------
+embed:
+  title: "🎮 Server Whitelist"
+  description: |
+    Welcome to our Minecraft Server!
+    
+    Click the **Whitelist Me** button below or use `/whitelist add <username>` to register your account.
+    
+    • Double check your Minecraft username spelling.
+    • Click **My Status** to view your linked account.
+  color: "#2ECC71"
+  thumbnail-url: "https://mc-heads.net/avatar/MHF_Chest/128.png"
+  footer-text: "DiscordWhitelist • Connect and play today!"
+
+# ----------------------------------------------------------------
+# Bot Presence / Activity
+# ----------------------------------------------------------------
+presence:
+  # Activity type: WATCHING, PLAYING, LISTENING, COMPETING
+  activity-type: "WATCHING"
+  activity-text: "for /whitelist requests"
+  # Status: ONLINE, IDLE, DND, INVISIBLE
+  status: "ONLINE"
+
+# ----------------------------------------------------------------
+# Messages & Responses
+# ----------------------------------------------------------------
+messages:
+  success: "You're whitelisted as **%username%**! Launch Minecraft and connect to **%server_ip%**."
+  already-used: "You've already whitelisted the account **%username%**. Use `/unwhitelist` first if you want to switch accounts."
+  already-whitelisted-name: "The username **%username%** is already linked to another Discord user."
+  invalid-username: "That's not a valid Minecraft username. It must be 3-16 alphanumeric characters."
+  mojang-account-not-found: "Could not find an official Mojang account named **%username%**. Please verify your spelling."
+  missing-required-role: "You must have the <@&%role_id%> role to whitelist on this server."
+  not-whitelisted: "You do not have any Minecraft account whitelisted."
+  unwhitelist-success: "Successfully unwhitelisted **%username%**. You may now link a new account."
+  no-permission: "You do not have permission to use this command."
+  generic-error: "An unexpected error occurred. Please contact staff."

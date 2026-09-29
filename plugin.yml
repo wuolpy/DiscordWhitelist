@@ -1,0 +1,23 @@
+name: DiscordWhitelist
+version: '1.1.0'
+main: me.server.discordwhitelist.DiscordWhitelistPlugin
+api-version: '1.21'
+author: Wuolp
+description: Advanced Discord Whitelist with Slash Commands, interactive panels, Mojang verification, and role management.
+commands:
+  discordwhitelist:
+    description: Manage the Discord whitelist plugin
+    aliases: [dwl, dwhitelist]
+    usage: /discordwhitelist <panel|reload|info|whois|online|update|unlink|add|list>
+    permission: discordwhitelist.admin
+  discordwhitelistpanel:
+    description: (Re)posts the Discord whitelist panel to the configured channel.
+    usage: /discordwhitelistpanel
+    permission: discordwhitelist.admin
+permissions:
+  discordwhitelist.admin:
+    description: Allows administrative management of the Discord whitelist plugin
+    default: op
+  discordwhitelist.user:
+    description: Allows user whitelist interaction
+    default: true
